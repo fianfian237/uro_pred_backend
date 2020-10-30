@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 
+import graphviz
+
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.pipeline import FeatureUnion, Pipeline
@@ -184,6 +186,29 @@ model_stade_picked = {"model": pipeline_stade,
                               "required_input" : categorical_features
                           }
                       }
+
+
+# DOT data grade
+dot_data_grade = tree.export_graphviz(pipeline_grade.steps[1][1], out_file =None, filled=True,
+                  feature_names=pipeline_grade['union'].transformer_list[0][1]['onehot']\
+                   .get_feature_names(categorical_features),
+                                class_names=df_train_grade["true_grade"].unique())
+
+# Draw graph grade
+graph_grade = graphviz.Source(dot_data_grade, format="png")
+
+
+# DOT data stade
+dot_data_stade = tree.export_graphviz(pipeline_stade.steps[1][1], out_file =None, filled=True,
+                  feature_names=pipeline_stade['union'].transformer_list[0][1]['onehot']\
+                   .get_feature_names(categorical_features),
+                                class_names=df_train_stade["true_stade"].unique())
+
+# Draw graph grade
+graph_stade = graphviz.Source(dot_data_stade, format="png")
+
+graph_grade.render("static/decision_tree_grade_final")
+graph_stade.render("static/decision_tree_stade_final")
 
 dump(model_grade_picked, "Modeles/model_grade.joblib")
 dump(model_stade_picked, "Modeles/model_stade.joblib")
