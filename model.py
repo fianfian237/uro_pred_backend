@@ -12,7 +12,7 @@ class Model:
         self.__model = loaded['model']
         self.meta_data = loaded['metadata']
 
-    def predict(self, features):
-        input = np.asarray(features).reshape(1, -1)
+    def predict(self, input):
+        # input = np.asarray(features).reshape(1, -1)
         result = self.__model.predict(input)
-        return int(result[0])
+        return result

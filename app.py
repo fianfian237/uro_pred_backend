@@ -1,8 +1,9 @@
 from flask import Flask, Response
 from model import Model
-from requests import request
+from flask import request
 import pandas as pd
-import jsonify
+from flask import jsonify
+import json
 
 
 app = Flask(__name__)
@@ -12,21 +13,25 @@ model_stade = Model('Modeles/model_stade.joblib')
 
 @app.route('/predict_grade', methods=["POST"])
 def predict_grade():
-    input = pd.DataFrame(request.body)
+    input_json = {k: [request.args.get(k)] for k in model_stade.meta_data["required_input"]}
+    input = pd.DataFrame(input_json)
+    app.logger.info(input)
     prediction = model_grade.predict(input)
-    result = dict({
-    'prediction': dict(prediction.iloc[0])
-    })
-    return jsonify(result)
+    result = {
+        'prediction': prediction[0]
+    }
+    return result
 
 @app.route('/predict_stade', methods=["POST"])
 def predict_stade():
-    input = pd.DataFrame(request.body)
+    input_json = {k: [request.args.get(k)] for k in model_stade.meta_data["required_input"]}
+    input = pd.DataFrame(input_json)
+    app.logger.info(input)
     prediction = model_stade.predict(input)
-    result = dict({
-        'prediction': dict(prediction.iloc[0])
-    })
-    return jsonify(result)
+    result = {
+        'prediction': prediction[0]
+    }
+    return result
 
 @app.route('/health')
 def health_check():
@@ -34,4 +39,5 @@ def health_check():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=4000)
+    app.run(debug=True)
+    # app.run(debug=True, host='0.0.0.0', port=4000)

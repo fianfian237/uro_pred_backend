@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.7
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends graphviz \
@@ -11,5 +11,5 @@ WORKDIR usr/src/app
 COPY . .
 RUN python -m pip install -r requirements.txt
 
-EXPOSE 4000
+#EXPOSE 4000 default port flask=5000
 CMD [ "python", "app.py" ]
