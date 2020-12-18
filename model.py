@@ -1,10 +1,5 @@
 from joblib import load
-import pandas as pd
-import numpy as np
 from preprocessing import ItemSelector
-
-
-
 
 class Model:
     def __init__(self, file_name):

@@ -6,3 +6,4 @@ hyperopt==0.2.5
 joblib
 jsonify
 requests
+gunicorn

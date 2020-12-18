@@ -8,8 +8,10 @@ RUN apt-get update \
 RUN mkdir usr/src/app
 WORKDIR usr/src/app
 
+COPY requirements.txt /tmp/
+RUN python -m pip install -r /tmp/requirements.txt
+
 COPY . .
-RUN python -m pip install -r requirements.txt
 
 #EXPOSE 4000 default port flask=5000
-CMD [ "python", "app.py" ]
+#CMD [ "python", "wsgi.py" ]

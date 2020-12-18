@@ -16,8 +16,8 @@ from sklearn.metrics import (confusion_matrix, precision_recall_curve, auc, roc_
 from scipy.stats import reciprocal, uniform
 from joblib import dump
 
-dataset_grade = pd.read_excel("data/GRADE.xlsx")
-dataset_stade = pd.read_excel("data/STADE.xlsx")
+dataset_grade = pd.read_excel("../data/GRADE.xlsx")
+dataset_stade = pd.read_excel("../data/STADE.xlsx")
 
 columns_grade = ["Repondant", "Numéro", "Video", "Structure", "Size", "Number", "Lesion Margin", "Lesion pedicle",
            "Lesion fronds", "Vascular architecture of the bladder wall", "Microvascular architecture of the tumor",
@@ -207,8 +207,8 @@ dot_data_stade = tree.export_graphviz(pipeline_stade.steps[1][1], out_file =None
 # Draw graph grade
 graph_stade = graphviz.Source(dot_data_stade, format="png")
 
-graph_grade.render("static/decision_tree_grade_final")
-graph_stade.render("static/decision_tree_stade_final")
+graph_grade.render("../static/decision_tree_grade_final")
+graph_stade.render("../static/decision_tree_stade_final")
 
 dump(model_grade_picked, "Modeles/model_grade.joblib")
 dump(model_stade_picked, "Modeles/model_stade.joblib")
