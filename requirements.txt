@@ -1,0 +1,9 @@
+numpy
+flask==1.1.2
+pandas==1.1.3
+scikit-learn==0.23.2
+hyperopt==0.2.5
+joblib
+jsonify
+requests
+gunicorn
