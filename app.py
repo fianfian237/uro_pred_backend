@@ -8,7 +8,7 @@ model_grade = Model('Modeles/model_grade.joblib')
 model_stade = Model('Modeles/model_stade.joblib')
 
 
-@app.route('/predict_grade_n_stade', methods=["POST"])
+@app.route('/predict_grade_n_stade', methods=["GET"])
 def predict_grade():
     input_json = {k: [request.args.get(k)] for k in model_stade.meta_data["required_input"]}
     input = pd.DataFrame(input_json)
