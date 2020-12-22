@@ -1,0 +1,14 @@
+#setup:
+# addons:
+#   - plan: heroku-postgresql
+build:
+ docker:
+   uro_pred_backend: Dockerfile
+# config:
+#   REQUIREMENTS_FILENAME: heroku.yml
+#release:
+# image: uro_pred_backend
+# command:
+#   - ./release.sh
+run:
+ uro_pred_backend: gunicorn -w 2 -b 0.0.0.0:4000 wsgi:app
