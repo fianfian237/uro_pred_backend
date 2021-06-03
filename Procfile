@@ -1,1 +1,1 @@
-web: gunicorn -w 2 -b $PORT wsgi:app
+web: gunicorn wsgi:app
