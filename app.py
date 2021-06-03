@@ -20,9 +20,9 @@ def predict_grade():
             'grade': prediction_grade[0],
             'stade': prediction_stade[0]
         }
-        return Response(result, status=200)
+        return Response(result, status=200, mimetype='application/json')
     except:
-        return Response("Something went wrong, please try again.", status=500)
+        return Response({"message":"Something went wrong, please try again."}, status=500, mimetype='application/json')
 
 @app.route('/health')
 def health_check():
