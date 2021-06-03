@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, Response, jsonify
 from model import Model
 from flask import request
 import pandas as pd
@@ -20,8 +20,9 @@ def predict_grade():
             'grade': prediction_grade[0],
             'stade': prediction_stade[0]
         }
-        print(result)
-        return Response(result, status=200, mimetype='application/json')
+        # print(result)
+        # return Response(result, status=200, mimetype='application/json')
+        return jsonify(result)
     except:
         return Response({"message":"Something went wrong, please try again."}, status=500, mimetype='application/json')
 
