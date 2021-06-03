@@ -20,6 +20,7 @@ def predict_grade():
             'grade': prediction_grade[0],
             'stade': prediction_stade[0]
         }
+        app.logger(result)
         return Response(result, status=200, mimetype='application/json')
     except:
         return Response({"message":"Something went wrong, please try again."}, status=500, mimetype='application/json')
