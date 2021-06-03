@@ -1,1 +1,1 @@
-web: gunicorn -w 1 -b $HOST:$PORT wsgi:app
+web: gunicorn -w 2 -b "https://preduro-backend.herokuapp.com:"+:$PORT -p $PORT wsgi:app
