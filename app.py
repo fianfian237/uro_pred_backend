@@ -12,18 +12,21 @@ model_stade = Model('Modeles/model_stade.joblib')
 def predict_grade():
     input_json = {k: [request.args.get(k)] for k in model_stade.meta_data["required_input"]}
     input = pd.DataFrame(input_json)
-    prediction_grade = model_grade.predict(input)
-    prediction_stade = model_stade.predict(input)
+    try:
+        prediction_grade = model_grade.predict(input)
+        prediction_stade = model_stade.predict(input)
 
-    result = {
-        'grade': prediction_grade[0],
-        'stade': prediction_stade[0]
-    }
-    return result
+        result = {
+            'grade': prediction_grade[0],
+            'stade': prediction_stade[0]
+        }
+        return Response(result, status=200)
+    except:
+        return Response("Something went wrong, please try again.", status=500)
 
 @app.route('/health')
 def health_check():
-    return Response("", status = 200)
+    return Response("", status=200)
 
 
 # if __name__ == '__main__':
